@@ -201,11 +201,7 @@ CREATE TABLE fto_estoque (
     sk_categoria                 NUMBER NOT NULL,
     sk_produto                   NUMBER NOT NULL,
     sk_centro_distribuicao       NUMBER NOT NULL,
-    sk_tempo                     NUMBER NOT NULL,
-    qt_estoque_total             NUMBER(10) NOT NULL,
-    qt_vendida                   NUMBER(10) NOT NULL,
-    vl_estoque                   NUMBER(10, 2) NOT NULL,
-    media_saida_estoque          NUMBER(10, 2) NOT NULL
+    sk_tempo                     NUMBER NOT NULL
 );
 
 COMMENT ON COLUMN fto_estoque.vl_media_reposicao_categoria IS
@@ -228,22 +224,6 @@ COMMENT ON COLUMN fto_estoque.vl_variacao_estoque_promocao IS
     'Essa métrica avalia como o estoque de produtos varia durante os períodos de promoções ou eventos sazonais. Informa a taxa sobre aumento ou diminuição da quantidade de produtos em estoque em relação aos níveis normais. Deve ser um numero inteiro, de até 8 casas decimais e duas casas após a vírgula e seu conteúdo é obrigatório.'
     ;
 
-COMMENT ON COLUMN fto_estoque.qt_estoque_total IS
-    'Este atributo irá receber a quantidade em estoque total de um determinado produto em um período. Seu conteúdo será obrigatório, contendo números inteiros e 10 casas decimais e somente valores positivos serão válidos.'
-    ;
-
-COMMENT ON COLUMN fto_estoque.qt_vendida IS
-    'Este atributo irá receber a quantidade de estoque vendida de um determinado produto em um período. Seu conteúdo será obrigatório, contendo números inteiros e 10 casas decimais e somente valores positivos serão válidos.'
-    ;
-
-COMMENT ON COLUMN fto_estoque.vl_estoque IS
-    'Este atributo irá receber o valor numérico do estoque de um determinado produto em um período. Seu conteúdo será obrigatório, contendo números inteiros e 10 casas decimais e 2 dígitos após a vírgula. Somente valores positivos serão válidos.'
-    ;
-
-COMMENT ON COLUMN fto_estoque.media_saida_estoque IS
-    'Este atributo irá correlacionar a média de saída do produto do estoque no tempo. Deverá ser obrigatório, numérico de até 10 casas decimais e 2 dígitos após a vírgula. '
-    ;
-
 ALTER TABLE fto_estoque
     ADD CONSTRAINT fto_estoque_pk PRIMARY KEY ( sk_fornecedor,
                                                 sk_categoria,
@@ -255,9 +235,8 @@ ALTER TABLE fto_estoque
     ADD CONSTRAINT fk_dim_categoria_fto_estoque FOREIGN KEY ( sk_categoria )
         REFERENCES dim_categoria ( sk_categoria );
 
---  ERROR: FK name length exceeds maximum allowed length(30) 
 ALTER TABLE fto_estoque
-    ADD CONSTRAINT fk_dim_centro_distribuicao_fto_estoque FOREIGN KEY ( sk_centro_distribuicao )
+    ADD CONSTRAINT fk_dim_centro_dist_fto_estoque FOREIGN KEY ( sk_centro_distribuicao )
         REFERENCES dim_centro_distribuicao ( sk_centro_distribuicao );
 
 ALTER TABLE fto_estoque
