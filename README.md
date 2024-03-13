@@ -8,7 +8,7 @@ Através da implementação dessa estrutura analítica, é possível oferecer um
 
 Ferramenta Utilizada: Oracle SQL Data Modeler
 
-<img src="https://github.com/thaishagler/modelagem_dimensional_star_schema/blob/main/modelo_f%C3%ADsico.png">
+<img src="https://github.com/thaishagler/modelagem_dimensional_star_schema/blob/main/modelo-fisico.png">
 
 # Dicionário de Dados
 
